@@ -64,6 +64,8 @@ function chatWidget(){
         justify-content: center;
         cursor: pointer;
         background-color: ${this.config?.circle_color || 'gray'};
+        animation-name: opacity-emergence;
+        animation-duration: .2s;
       }
       .chat-bubble svg{
         width: 40px;
@@ -287,22 +289,30 @@ function chatWidget(){
         line-height: 20px;
         color: #fff;
       }
-      .prints ~ .chat-online{
+      @keyframes opacity-emergence{
+        0%{
+          opacity: 0;
+        }
+        100%{
+          opacity: 1
+        }
+      }
+      .chat-prints ~ .chat-online{
         display: none;
       }
-      .prints{
+      .chat-prints{
         display: flex;
         align-items: center;
         color: #fff;
       }
-      .prints-circle-container{
+      .chat-prints-circle-container{
           display: flex;
           align-items: center;
           column-gap: 4px;
           margin-right: 5px;
       }
 
-      .prints-circle{
+      .chat-prints-circle{
           min-width: 3px;
           width: 3px;
           max-width: 3px;
@@ -313,23 +323,23 @@ function chatWidget(){
           background-color: #fff;
       }
 
-      .prints-circle-first{
-          animation-name: prints-circle-first;
+      .chat-prints-circle-first{
+          animation-name: chat-prints-circle-first;
           animation-duration: 1.5s;
           animation-iteration-count: infinite;
       }
-      .prints-circle-second{
-          animation-name: prints-circle-second;
+      .chat-prints-circle-second{
+          animation-name: chat-prints-circle-second;
           animation-duration: 1.5s;
           animation-iteration-count: infinite;
       }
-      .prints-circle-third{
-          animation-name: prints-circle-third;
+      .chat-prints-circle-third{
+          animation-name: chat-prints-circle-third;
           animation-duration: 1.5s;
           animation-iteration-count: infinite;
       }
 
-      @keyframes prints-circle-first{
+      @keyframes chat-prints-circle-first{
           0%{
               transform: scale(1);
           }
@@ -344,7 +354,7 @@ function chatWidget(){
           }
           
       }
-      @keyframes prints-circle-second{
+      @keyframes chat-prints-circle-second{
           0%{
               transform: scale(1);
           }
@@ -361,7 +371,7 @@ function chatWidget(){
               transform: scale(1);
           }
       }
-      @keyframes prints-circle-third{
+      @keyframes chat-prints-circle-third{
           0%{
               transform: scale(1);
           }
@@ -670,20 +680,20 @@ function chatWidget(){
     },
       printsAdd(){
         const printsContainer = document.querySelector('.chat-status')
-        if(printsContainer.querySelector('[data-prints-loading]')) return
+        if(printsContainer.querySelector('[data-chat-prints-loading]')) return
         printsContainer.prepend(this.getPrintsHTML())
       },
       printsRemove(){
-        const printsContainer = document.querySelector('.chat-status [data-prints-loading]')
+        const printsContainer = document.querySelector('.chat-status [data-chat-prints-loading]')
         printsContainer?.remove()
       },
       getPrintsHTML(){
         const prints = document.createElement('div')
-        prints.innerHTML = `<div class="prints" data-prints-loading>
-                                        <div class="prints-circle-container">
-                                          <div class="prints-circle prints-circle-first"></div>
-                                            <div class="prints-circle prints-circle-second"></div>
-                                              <div class="prints-circle prints-circle-third"></div>
+        prints.innerHTML = `<div class="chat-prints" data-chat-prints-loading>
+                                        <div class="chat-prints-circle-container">
+                                          <div class="chat-prints-circle chat-prints-circle-first"></div>
+                                            <div class="chat-prints-circle chat-prints-circle-second"></div>
+                                              <div class="chat-prints-circle chat-prints-circle-third"></div>
                                             </div>
                                             печатает
                                         </div>`
